@@ -20,12 +20,18 @@ export const Signup = (props) => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
   const navigate = useNavigate();
   const { isSignupOpen, handleSignupToggle, handleSigninToggle } = props;
 
   const handleSwitchToggle = () => {
-    handleSignupToggle();
-    handleSigninToggle();
+    setIsFadingOut(true);
+
+    setTimeout(() => {
+      setIsFadingOut(false);
+      handleSignupToggle();
+      handleSigninToggle();
+    }, 300);
   };
 
   const handleChange = (e) => {
@@ -103,7 +109,11 @@ export const Signup = (props) => {
       {isSignupOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           {/**Modal container */}
-          <div className="relative w-full mx-4 bg-white rounded-lg shadow-lg p-4 animate-in fade-in--90 zoon-in-90 max-w-[320px]">
+          <div
+            className={`relative w-full mx-4 bg-white rounded-lg shadow-lg p-4 transform transition-all duration-700 animate-in fade-in-50 zoom-in-75 ease-in-out max-w-[320px] ${
+              isFadingOut ? "opacity-0 scale-95" : "opacity-100 scale-100"
+            }`}
+          >
             {/**Close button */}
             <button
               onClick={handleSignupToggle}
