@@ -6,6 +6,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import API from "@/services/api";
 import { Spinner } from "./ui/spinner";
+import { toast } from "sonner";
 
 export const Signup = (props) => {
   const [formData, setFormData] = useState({
@@ -92,9 +93,9 @@ export const Signup = (props) => {
       });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
-      console.log(formData);
+      toast("Account created successfully 🎉");
     } catch (error) {
-      alert(error.response?.data?.message || "Signup failed");
+      toast(error.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
     }
@@ -155,7 +156,7 @@ export const Signup = (props) => {
                   <div
                     className={`transition-all duration-400 overflow-hidden ${
                       error.email
-                        ? "max-h-10 opacity-100.translate-y-0"
+                        ? "max-h-10 opacity-100 translate-y-0"
                         : "max-h-0 opacity-0 -translate-y-1"
                     }`}
                   >

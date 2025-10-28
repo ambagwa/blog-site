@@ -10,9 +10,9 @@ const blogSchema = new mongoose.Schema(
       required: true,
     },
     category: { type: String, default: "General" },
-    tags: [{ type: String }],
+    tags: { type: [String], default: [] },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Blog", blogSchema);

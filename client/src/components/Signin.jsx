@@ -6,6 +6,7 @@ import { Input } from "./ui/input";
 import API from "@/services/api";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "./ui/spinner";
+import { toast } from "sonner";
 
 export const Signin = (props) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -55,7 +56,7 @@ export const Signin = (props) => {
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
       isValid = false;
-    } else if (password.length < 6) {
+    } else if (formData.password.length < 6) {
       newErrors.password = "Password MUST be at least 6 characters";
       isValid = false;
     }
@@ -79,13 +80,14 @@ export const Signin = (props) => {
       });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
+      toast("Welcome back 🎉")
 
       if (!res.data.token) {
-        alert("Login failed: No token");
+        toast("Login failed: No token");
         return;
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      toast(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -145,7 +147,7 @@ export const Signin = (props) => {
                   <div
                     className={`transition-all duration-400 overflow-hidden ${
                       error.email
-                        ? "max-h-10 opacity-100.translate-y-0"
+                        ? "max-h-10 opacity-100 translate-y-0"
                         : "max-h-0 opacity-0 -translate-y-1"
                     }`}
                   >
@@ -178,7 +180,7 @@ export const Signin = (props) => {
                   <div
                     className={`transition-all duration-400 overflow-hidden ${
                       error.password
-                        ? "max-h-10 opacity-100.translate-y-0"
+                        ? "max-h-10 opacity-100 translate-y-0"
                         : "max-h-0 opacity-0 -translate-y-1"
                     }`}
                   >

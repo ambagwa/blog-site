@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -8,6 +10,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Custom font families */
+  --font-inter: Inter, "sans-serif";
+
+  /* Color tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -41,6 +48,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Base variables */
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -76,6 +84,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Darl mode overrides */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -110,6 +119,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Base overlay styles */
 @layer base {
   * {
     @apply border-border outline-ring/50;

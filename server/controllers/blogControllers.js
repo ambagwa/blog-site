@@ -6,6 +6,8 @@ exports.fetchAllBlogs = async (req, res) => {
     const blogs = await Blog.find().populate("author", "username email");
     if (!blogs || blogs.length === 0)
       return res.status(404).json({ error: "Blogs not found" });
+
+    res.status(200).json({ blogs });
   } catch (error) {
     console.error(`Error while fetching tasks: ${error}`);
     return res.status(500).json({ error: "Internal server error" });
@@ -46,7 +48,10 @@ exports.createBlog = async (req, res) => {
 // GET /api/tasks/me
 exports.fetchMyBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find({ author: req.user.id });
+    const blogs = await Blog.find({ author: req.user.id }).populate(
+      "author",
+      "username email"
+    );
     if (!blogs || blogs.length === 0)
       return res.status(404).json({ error: "No blogs found for this user" });
 
