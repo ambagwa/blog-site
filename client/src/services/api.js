@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: "https://blog-site-zk15.onrender.com",
 });
 
 // Automatically add a token to every request if the user is logged in
