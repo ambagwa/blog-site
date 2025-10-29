@@ -129,7 +129,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
       {/** Modal overlay */}
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
         {/** Modal container */}
-        <div className="relative w-full mx-4 bg-white rounded-lg shadow-lg p-4 transform transition all duration-700 animate-in fade-in-50 zoom-in-5 ease-in-out maxx-w-320px[]">
+        <div className="relative w-full md:max-w-[400px] mx-4 bg-white rounded-lg shadow-lg p-4 transform transition all duration-700 animate-in fade-in-50 zoom-in-5 ease-in-out maxx-w-320px[]">
           <h3 className="text-lg font-semibold">
             {editingBlog ? "Edit blog" : "Create New Blog Post"}
           </h3>

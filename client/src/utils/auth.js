@@ -18,8 +18,16 @@ export const getUserFromToken = () => {
 };
 
 export const getUserRole = () => {
-  const user = getUserFromToken();
-  return user?.role || null;
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.role;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
 };
 
 export const isAdmin = () => {
@@ -31,6 +39,14 @@ export const isBlogger = () => {
 };
 
 export const getUsername = () => {
-  const user = getUserFromToken();
-  return user?.username || null;
+  const token = localStorage.getItem("token");
+  if(!token) return;
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.username;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
 };

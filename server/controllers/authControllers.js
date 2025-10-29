@@ -22,11 +22,16 @@ exports.signup = async (req, res) => {
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Determine role based on email
+    const adminEmails = ["ambagwa@bloghub.com", "enga@bloghub.com"];
+    const role = adminEmails.includes(email) ? "admin" : "blogger";
+
     // Save the user
     const user = await User.create({
       username,
       email,
       password: hashedPassword,
+      role: role,
     });
 
     // Assign a token to the user
@@ -36,7 +41,7 @@ exports.signup = async (req, res) => {
       { expiresIn: "1h" },
     );
 
-    res.json({ token });
+    res.json({ token, role: user.role });
   } catch (error) {
     console.error(`Signup error: ${error}`);
     res

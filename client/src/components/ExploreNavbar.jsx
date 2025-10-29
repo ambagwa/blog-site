@@ -14,7 +14,7 @@ const ExploreNavbar = ({ handleBlogCategories }) => {
     "business",
     "food",
     "health",
-    "life",
+    "lifestyle",
     "technology",
     "travel",
   ];

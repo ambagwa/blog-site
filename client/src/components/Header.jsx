@@ -8,7 +8,7 @@ const Header = (props) => {
 
   return (
     <>
-    <div className="sticky top-0 z-50 relative md:px-5 px-2 py-3 flex justify-between border-b shadow-md shadow-gray-300 bg-[url('https://images.unsplash.com/photo-1631519952398-5b1d76b946e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3c3BhcGVyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=1000')]">
+    <div className="sticky top-0 z-50 md:px-15 px-10 py-3 flex justify-between border-b shadow-md shadow-gray-300 bg-[url('https://images.unsplash.com/photo-1631519952398-5b1d76b946e8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3c3BhcGVyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=1000')]">
       <div className="absolute inset-0 bg-white/90"></div>
       <div className="relative flex justify-between w-full">
         <div className="flex items-center space-x-2">

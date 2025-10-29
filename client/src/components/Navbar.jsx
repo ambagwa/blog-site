@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { getUserRole, getUsername, getUserFromToken } from "../utils/auth";
@@ -8,10 +8,7 @@ import { useState } from "react";
 
 export const Navbar = () => {
   const userRole = getUserRole();
-  const user = getUserFromToken();
   const username = getUsername();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const [active, setActive] = useState("explore");
 
@@ -24,8 +21,11 @@ export const Navbar = () => {
     window.location.href = "/";
   };
 
+  // Check if user is admin
+  const isAdmin = userRole === "admin";
+
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b md:px-20 border-zinc-200 dark:border-zinc-700 px-4 py-2 flex items-center justify-between shadow-lg">
+    <nav className="bg-white dark:bg-black/50 sticky top-0 z-50 border-b md:px-20 border-zinc-200 dark:border-zinc-700 px-4 py-2 flex items-center justify-between shadow-lg">
       <div className="flex items-center space-x-1">
         <BookOpenIcon className="size-6 text-blue-500" />
         <Link to="/dashboard" className="font-bold text-lg">
@@ -34,21 +34,23 @@ export const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-1 justify-end">
-        {/**Explore button */}
-        <Link to="/dashboard/explore">
-          <Button
-            size="xs"
-            className={`hover:cursor-pointer ${
-              active === "explore" ? "bg-blue-600 text-white" : ""
-            }`}
-            variant={active === "explore" ? "blue" : "ghost"}
-            onClick={() => handleNavClick("explore")}
-          >
-            Explore
-          </Button>
-        </Link>
+        {/**Explore button - Only shown to admin */}
+        {isAdmin && (
+          <Link to="/dashboard/explore">
+            <Button
+              size="xs"
+              className={`hover:cursor-pointer ${
+                active === "explore" ? "bg-blue-600 text-white" : ""
+              }`}
+              variant={active === "explore" ? "blue" : "ghost"}
+              onClick={() => handleNavClick("explore")}
+            >
+              Explore
+            </Button>
+          </Link>
+        )}
 
-        {/**My Blogs button */}
+        {/**My Blogs button - show to all users */}
         <Link to="/dashboard/my-blogs">
           <Button
             size="xs"
@@ -65,10 +67,12 @@ export const Navbar = () => {
 
         <ThemeToggle />
         <div className="flex items-center gap-3">
-          <span className="text-sm text-gray-600">{username}</span>
+          <span className="text-sm text-gray-600 md:ml-5 bg-blue-100 py-1 px-2 rounded-4xl">
+            {isAdmin ? "Admin" : {username} }
+          </span>
           <button
             onClick={logout}
-            className="flex items-center text-gray-700 hover:text-red-600 transition-colors hover:cursor-pointer"
+            className="flex items-center text-gray-700 dark:text-gray-100 dark:hover:text-gray-500 hover:text-red-600 transition-colors hover:cursor-pointer"
             title="Log Out"
           >
             <LogOut size={12} />

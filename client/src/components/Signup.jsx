@@ -90,6 +90,7 @@ export const Signup = (props) => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        role: "blogger",
       });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
