@@ -57,11 +57,11 @@ export const Explore = () => {
   };
 
   return (
-    <div className="p-5 bg-blue-50 min-h-screen">
-      <h1 className="font-inter font-bold text-gray-900 tracking-wide text-center text-xl">
+    <div className="p-5 bg-blue-50 dark:bg-gray-900 shadow-lg min-h-screen">
+      <h1 className="font-inter font-bold text-gray-900 dark:text-gray-100 tracking-wide text-center text-xl">
         Discover amazing blog posts
       </h1>
-      <p className="mb-5 font-inter text-center text-[10px] mt-1 tracking-wider text-gray-600">
+      <p className="mb-5 dark:text-gray-200 font-inter text-center text-[10px] mt-1 tracking-wider text-gray-600">
         Browse through our collection of stories from talented writers
       </p>
 
@@ -82,11 +82,11 @@ export const Explore = () => {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }} // 👈 stagger animation
                   onClick={() => openModal(blog)}
-                  className="rounded-sm hover:shadow-lg p-3 bg-white shadow-md hover:cursor-pointer group hover:-translate-y-1 transition-all duration-300"
+                  className="rounded-sm hover:shadow-lg p-3 bg-white dark:bg-gray-800 shadow-md hover:cursor-pointer group hover:-translate-y-1 transition-all duration-300"
                 >
                   {/**Floating tabs */}
                   <div className="flex gap-2  flex-row">
-                    <span className="flex gap-1 text-blue-700 bg-blue-50 text-[8px] font-normal p-1 rounded-lg px-3">
+                    <span className="flex gap-1 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-600 text-[8px] font-normal p-1 rounded-lg px-3">
                       <Tag className="h-2 w-2 mt-0.5" />
                       {blog.category}
                     </span>
@@ -112,7 +112,7 @@ export const Explore = () => {
                       {blog.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className="bg-blue-100 text-blue-800 text-[8px] px-2 py-1 rounded-full whitespace-nowrap"
+                          className="bg-blue-100 dark:text-blue-200 text-blue-800 text-[8px] px-2 py-1 rounded-full  dark:bg-gray-700 whitespace-nowrap"
                         >
                           {tag}
                         </span>

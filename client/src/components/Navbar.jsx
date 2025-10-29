@@ -25,7 +25,7 @@ export const Navbar = () => {
   const isAdmin = userRole === "admin";
 
   return (
-    <nav className="bg-white dark:bg-black/50 sticky top-0 z-50 border-b md:px-20 border-zinc-200 dark:border-zinc-700 px-4 py-2 flex items-center justify-between shadow-lg">
+    <nav className="bg-white dark:bg-gray-800 sticky top-0 z-50 border-b md:px-20 border-zinc-200 dark:border-zinc-700 px-4 py-2 flex items-center justify-between shadow-lg">
       <div className="flex items-center space-x-1">
         <BookOpenIcon className="size-6 text-blue-500" />
         <Link to="/dashboard" className="font-bold text-lg">
@@ -68,7 +68,7 @@ export const Navbar = () => {
         <ThemeToggle />
         <div className="flex items-center gap-3">
           <span className="text-sm text-gray-600 md:ml-5 bg-blue-100 py-1 px-2 rounded-4xl">
-            {isAdmin ? "Admin" : {username} }
+            {isAdmin ? "Admin" : username }
           </span>
           <button
             onClick={logout}

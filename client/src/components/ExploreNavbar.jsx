@@ -26,10 +26,10 @@ const ExploreNavbar = ({ handleBlogCategories }) => {
           key={category}
           size="xs"
           variant={active === category ? "blue" : "ghost"}
-          className={`text-[9px] font-normal tracking-wide rounded-3xl p-2 hover:cursor-pointer ${
+          className={`text-[9px] font-normal tracking-wide bg-gray-100 dark:bg-gray-700 rounded-3xl p-2 hover:cursor-pointer ${
             active === category
               ? "bg-blue-600 text-white"
-              : "text-gray-700 hover:bg-gray-200"
+              : "text-gray-700 dark:text-gray-400 dark:hover:bg-teal-900 hover:bg-gray-200"
           }`} 
           onClick={() => handleNavCLick(category)}
         >

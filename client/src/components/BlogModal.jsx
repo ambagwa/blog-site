@@ -7,18 +7,18 @@ export const BlogModal = ({ blog, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm bg-opacity-40 flex justify-center items-center z-50">
-      <div className="bg-white rounded-md shadow-lg w-[90%] md:w-[60%] lg:w-[50%] p-5 relative animate-in fade-in duration-300">
+      <div className="bg-white dark:bg-gray-800 rounded-md shadow-lg w-[90%] md:w-[60%] lg:w-[50%] p-5 relative animate-in fade-in duration-300">
         {/** Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 hover:cursor-pointer"
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 hover:cursor-pointer"
         >
           <X className="h-4 w-4" />
         </button>
 
         {/* Blog content */}
         <div className="space-y-3">
-          <h2 className="text-lg font-bold text-gray-900">{blog.title}</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">{blog.title}</h2>
           <div className="flex flex-wrap gap-3 text-[10px] text-gray-500">
             <span className="flex gap-1 items-center">
               <User className="h-3 w-3" /> {blog.author.username}
@@ -32,7 +32,7 @@ export const BlogModal = ({ blog, onClose }) => {
             </span>
           </div>
 
-          <p className="text-[13px] text-gray-700 loading-relaxed">
+          <p className="text-[11px] text-gray-700 loading-relaxed dark:text-gray-400">
             {blog.content}
           </p>
 
@@ -42,7 +42,7 @@ export const BlogModal = ({ blog, onClose }) => {
               {blog.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-blue-100 text-blue-800 text-[9px] px-2 py-1 rounded-full"
+                  className="bg-blue-100 dark:bg-gray-900 text-blue-800 text-[9px] px-2 py-1 rounded-full"
                 >
                   {tag}
                 </span>

@@ -67,7 +67,7 @@ export const MyBlogs = () => {
   }, [blogs, searchTerm]);
 
   return (
-    <div className="px-5 bg-blue-50 md:px-20 pt-5 font-inter min-h-screen">
+    <div className="px-5 bg-blue-50 dark:bg-gray-900 md:px-20 pt-5 font-inter min-h-screen">
       {/** Title */}
       <div className="flex align-center justify-between my-1">
         <h1 className="font-bold text-[14px]">My Blog Posts</h1>
@@ -117,13 +117,13 @@ export const MyBlogs = () => {
         filteredBlogs.map((blog) => (
           <div
             key={blog._id}
-            className="p-4 space-y-2 border-b bg-white shadow-md rounded-sm grid grid-cols-5 mt-5 hover:shadow-lg"
+            className="p-4 space-y-2  dark:bg-gray-800 border-b bg-white shadow-md rounded-sm grid grid-cols-5 mt-5 hover:shadow-lg"
           >
             <div className="col-span-4 mr-3">
-              <h2 className="font-semibold tracking-wide text-[15px] wrap-break-word">
+              <h2 className="font-semibold  dark:text-gray-100 tracking-wide text-[15px] wrap-break-word">
                 {blog.title || "Untitled"}
               </h2>
-              <p className="mt-1 text-[10px] text-gray-700 line-clamp-3">
+              <p className="mt-1 text-[10px] dark:text-gray-400 text-gray-700 line-clamp-3">
                 {blog.content}
               </p>
               <div className="mt-1 flex items-center gap-2 text-[8px] text-gray-500">
@@ -136,14 +136,15 @@ export const MyBlogs = () => {
               <Button
                 variant="ghost"
                 size="xs"
-                className="p-1"
+                className="p-1 dark:hover:bg-transparent"
                 onClick={() => handleUpdate(blog)}
               >
-                <SquarePen className="h-4 w-4 text-gray-700" />
+                <SquarePen className="h-4 w-4 text-gray-700 dark:hover:text-white" />
               </Button>
               <Button
                 variant="ghost"
                 size="xs"
+                className="dark:hover:text-white dark:hover:bg-transparent"
                 onClick={() => handleDelete(blog._id)}
               >
                 <Trash2 className="h-4 w-4 text-red-700" />
