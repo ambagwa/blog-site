@@ -9,7 +9,7 @@ connectDB();
 // Allowed oigins 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://blog-site-backend-2xdt.onrender.com",
+  "https://blog-site-frontend-1ol0.onrender.com",
 ]
 
 app.use(cors({
