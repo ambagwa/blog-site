@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://blog-site-backend-2xdt.onrender.com/api",
+  baseURL: "https://blog-site-backend-2xdt.onrender.com",
 });
 
 // Automatically add a token to every request if the user is logged in

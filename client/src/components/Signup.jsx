@@ -86,7 +86,7 @@ export const Signup = (props) => {
     setLoading(true);
 
     try {
-      const res = await API.post("/auth/signup", {
+      const res = await API.post("/api/auth/signup", {
         username: formData.username,
         email: formData.email,
         password: formData.password,

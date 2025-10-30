@@ -30,7 +30,7 @@ export const MyBlogs = () => {
     setLoading(true);
 
     try {
-      const res = await API.get("/blog/me");
+      const res = await API.get("/api/blog/me");
       setBlogs(res.data.blogs);
     } catch (error) {
       console.error(`Error while fetching blogs: ${error}`);
@@ -53,7 +53,7 @@ export const MyBlogs = () => {
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`/blog/${id}`);
+    await API.delete(`/api/blog/${id}`);
     setBlogs((prevBlogs) => prevBlogs.filter((b) => b._id !== id));
     toast("Task deleted");
   };

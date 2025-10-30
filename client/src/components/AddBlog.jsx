@@ -98,7 +98,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
       let res;
       if (isEditing) {
         // Update existing blog
-        res = await API.put(`/blog/${editingBlog._id}`, formData);
+        res = await API.put(`/api/blog/${editingBlog._id}`, formData);
         toast("Blog updated successfully");
 
         // Refresh list with the updated blog
@@ -109,7 +109,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
         );
       } else {
         //Add new blog
-        res = await API.post("/blog", formData);
+        res = await API.post("/api/blog", formData);
         toast("Blog added successfully");
         // Refresh list
         setBlogs((prevBlogs) => [res.data.blog, ...prevBlogs]);

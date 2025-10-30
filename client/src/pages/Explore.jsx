@@ -23,7 +23,7 @@ export const Explore = () => {
   const loadBlogs = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/blog/all");
+      const res = await API.get("/api/blog/all");
       setBlogs(res.data.blogs);
       setAllBlogs(res.data.blogs);
     } catch (error) {
