@@ -24,6 +24,7 @@ export const Signup = (props) => {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const navigate = useNavigate();
   const { isSignupOpen, handleSignupToggle, handleSigninToggle } = props;
+  const [passwordStrength, setPasswordStrength] = useState(0);
 
   const handleSwitchToggle = () => {
     setIsFadingOut(true);
@@ -35,9 +36,21 @@ export const Signup = (props) => {
     }, 300);
   };
 
+  const checkPasswordStrength = (password) => {
+    let strength = 0;
+    if (password.length >= 6) strength++;
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+    if (password.match(/\d/)) strength++;
+    if (password.match(/[^a-zA-Z\d]/)) strength++;
+    return strength;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prvData) => ({ ...prvData, [name]: value }));
+
+    // Check password strength
+    if (name === "password") setPasswordStrength(checkPasswordStrength(value));
 
     // Clear error as the user types
     setError((prev) => ({ ...prev, [name]: "" }));
@@ -92,13 +105,29 @@ export const Signup = (props) => {
         password: formData.password,
         role: "blogger",
       });
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
-      toast("Account created successfully 🎉");
+
+      // Check if token exists in response
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        navigate("/dashboard");
+        toast("Account created successfully 🎉");
+      } else {
+        throw new Error("No token recieved from server");
+      }
     } catch (error) {
-      toast(error.response?.data?.message || "Signup failed");
+      if (error.response?.status === 409) {
+        toast("Email already esists");
+      } else if (error.response?.status === 400) {
+        toast(error.response.data.message || "Invalid input data");
+      } else if (error.request) {
+        toast("Network error - Cannot connect to the server");
+      } else {
+        toast(error.response?.data?.message || "Signup failed");
+      }
     } finally {
       setLoading(false);
+      clearInputs();
+      handleSignupToggle();
     }
 
     clearInputs();
@@ -193,7 +222,7 @@ export const Signup = (props) => {
                   <div
                     className={`transition-all duration-400 overflow-hidden ${
                       error.email
-                        ? "max-h-10 opacity-100.translate-y-0"
+                        ? "max-h-10 opacity-100 translate-y-0"
                         : "max-h-0 opacity-0 -translate-y-1"
                     }`}
                   >
@@ -202,13 +231,6 @@ export const Signup = (props) => {
                         {error.email}
                       </p>
                     )}
-                    <div
-                      className={`transition-all duration-400 overflow-hidden ${
-                        error.email
-                          ? "max-h-10 opacity-100.translate-y-0"
-                          : "max-h-0 opacity-0 -translate-y-1"
-                      }`}
-                    ></div>
                   </div>
                 </div>
 
@@ -230,6 +252,37 @@ export const Signup = (props) => {
                     value={formData.password}
                     onChange={handleChange}
                   />
+
+                  {/** Password Strength Indicator */}
+                  {formData.password && (
+                    <div className="mt-2 space-y-1">
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4].map((level) => (
+                          <div
+                            key={level}
+                            className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                              passwordStrength >= level
+                                ? level === 1
+                                  ? "bg-red-500"
+                                  : level === 2
+                                  ? "bg-orange-500"
+                                  : level === 3
+                                  ? "bg-yellow-500"
+                                  : "bg-green-500"
+                                : "bg-gray-200"
+                            }`}
+                          ></div>
+                        ))}
+                        <p className="text-gray-600 text-[10px]">
+                          {passwordStrength === 0 && "Very weak"}
+                          {passwordStrength === 1 && "Weak"}
+                          {passwordStrength === 2 && "Fair"}
+                          {passwordStrength === 3 && "Good"}
+                          {passwordStrength === 4 && "Strong"}
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
                   <div
                     className={`transition-all duration-400 overflow-hidden ${

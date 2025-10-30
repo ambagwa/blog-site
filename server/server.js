@@ -6,27 +6,32 @@ const connectDB = require("./config/db");
 const app = express();
 connectDB();
 
-// Allowed oigins 
+// Allowed oigins
 const allowedOrigins = [
   "http://localhost:5173",
   "https://blog-site-frontend-1ol0.onrender.com",
-]
+];
 
-app.use(cors({
+// CORS configuration
+const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (mobile apps, curl, postman)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
-}));
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+};
 
-//mmiddleware
+// CORS middleware
+app.use(cors(corsOptions));
+
+// middleware
 app.use(express.json());
 
 // Test route
