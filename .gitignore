@@ -35,7 +35,7 @@ build/
 # Dependency directories
 client/node_modules/
 client/.env
-client/.env.local
+client/.env.production
 client/.env.development.local
 client/.env.test.local
 client/.env.production.local

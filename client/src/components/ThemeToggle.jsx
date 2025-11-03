@@ -23,7 +23,7 @@ const ThemeToggle = () => {
 
   return (
     <Button
-        size="xs"
+        size="md"
       variant="ghost"
        className="hover:cursor-pointer"
       aria-label="toggle theme"

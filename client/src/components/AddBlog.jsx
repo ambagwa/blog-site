@@ -129,7 +129,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
       {/** Modal overlay */}
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
         {/** Modal container */}
-        <div className="relative w-full md:max-w-[400px] dark:bg-gray-800 mx-4 bg-white rounded-lg shadow-lg p-4 transform transition all duration-700 animate-in fade-in-50 zoom-in-5 ease-in-out maxx-w-320px[]">
+        <div className="relative w-full md:max-w-[600px] dark:bg-gray-800 mx-4 bg-white rounded-lg shadow-lg p-4 transform transition all duration-700 animate-in fade-in-50 zoom-in-5 ease-in-out maxx-w-320px[]">
           <h3 className="text-lg font-semibold">
             {editingBlog ? "Edit blog" : "Create New Blog Post"}
           </h3>
@@ -137,12 +137,12 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
             <div className="space-y-2">
               {/**Title input*/}
               <div className="space-y-1">
-                <Label htmlFor="blogTitle" className="text-[10px] font-medium">
+                <Label htmlFor="blogTitle" className="text-[12px] font-medium">
                   Title*
                 </Label>
                 <Input
                   id="blogTitle"
-                  className={`h-6 text-xs transition-all duration-400 ease-in-out ${
+                  className={`h-8 text-xs transition-all duration-400 ease-in-out ${
                     errors.title
                       ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
                       : "border-gray-300 focus:ring-1 focus:ring-blue-500"
@@ -172,14 +172,14 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
               <div className="space-y-1 relative">
                 <Label
                   htmlFor="blogCategory"
-                  className="text-[10px] font-medium"
+                  className="text-[12px] font-medium"
                 >
                   Category*
                 </Label>
                 <Button
                   type="button"
                   variant="outline"
-                  size="xs"
+                  size="lg"
                   onClick={() => setOpen(!open)}
                   className={`w-full flex items-center justify-between border rounded-md px-3 py-1.5 text-left text-sm transition-all duration-200 ${
                     errors.category
@@ -187,7 +187,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
                       : "border-gray-300 hover:border-blue-400"
                   }`}
                 >
-                  <span className="text-xs">{selected}</span>
+                  <span className="text-[12px]">{selected}</span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform duration-200 ${
                       open ? "rotate-180" : "rotate-0"
@@ -197,7 +197,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
 
                 {/**Dropdown menu */}
                 {open && (
-                  <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-40 overflow-auto text-sm">
+                  <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-700  border border-gray-200 rounded-md shadow-lg max-h-40 overflow-auto text-sm">
                     {options.map((option) => (
                       <li
                         key={option}
@@ -239,12 +239,12 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
 
               {/** Tags input */}
               <div className="space-y-1">
-                <Label htmlFor="tags" className="text-[10px] font-medium">
+                <Label htmlFor="tags" className="text-[12px] font-medium">
                   Tags*
                 </Label>
                 <Input
                   id="tags"
-                  className={`h-6 text-xs transition-all duration-400 ease-in-out ${
+                  className={`h-8 text-xs transition-all duration-400 ease-in-out ${
                     errors.tags
                       ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
                       : "border-gray-300 focus:ring-1 focus:ring-blue-500"
@@ -304,7 +304,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
 
               {/** Content input */}
               <div className="space-y-1">
-                <Label htmlFor="content" className="text-[10px] font-medium">
+                <Label htmlFor="content" className="text-[12px] font-medium">
                   Content*
                 </Label>
                 <Textarea

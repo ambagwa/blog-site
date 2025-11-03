@@ -150,7 +150,7 @@ export const Signup = (props) => {
               onClick={handleSignupToggle}
               className="absolute top-3 right-3 p-1 rounded-sm hover:bg-gray-100 transition-colors"
             >
-              <X className="h-4 w-4" />
+              <X className="h-6 w-6" />
             </button>
 
             {/**Header */}
@@ -166,12 +166,12 @@ export const Signup = (props) => {
               <div className="space-y-2">
                 {/**Username input */}
                 <div className="space-y-1">
-                  <Label htmlFor="username" className="text-xs font-medium">
+                  <Label htmlFor="username" className="text-md font-normal">
                     Username
                   </Label>
                   <Input
                     id="username"
-                    className={`h-6 text-sm transition-all duration-400 ease-in-out ${
+                    className={`h-8 text-sm transition-all duration-400 ease-in-out ${
                       error.username
                         ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
                         : "border-gray-300 focus:ring-1 focus:ring-blue-500"
@@ -201,13 +201,13 @@ export const Signup = (props) => {
 
                 {/**Email input */}
                 <div className="space-y-1">
-                  <Label className="text-xs font-me" htmlFor="email">
+                  <Label className="text-md font-normal" htmlFor="email">
                     Email
                   </Label>
                   <Input
                     id="email"
                     type="email"
-                    className={`h-6 text-sm transition-all duration-400 ease-in-out ${
+                    className={`h-8 text-sm transition-all duration-400 ease-in-out ${
                       error.email
                         ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
                         : "border-gray-300 focus:ring-1 focus:ring-blue-500"
@@ -236,13 +236,13 @@ export const Signup = (props) => {
 
                 {/**Password input */}
                 <div className="space-y-1">
-                  <Label className="text-xs font-me" htmlFor="password">
+                  <Label className="text-md font-normal" htmlFor="password">
                     Password
                   </Label>
                   <Input
                     id="password"
                     type="password"
-                    className={`h-6 text-sm transition-all duration-400 ease-in-out ${
+                    className={`h-8 text-sm transition-all duration-400 ease-in-out ${
                       error.password
                         ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
                         : "border-gray-300 focus:ring-1 focus:ring-blue-500"
@@ -302,7 +302,7 @@ export const Signup = (props) => {
 
               <Button
                 variant="blue"
-                className="w-full h-6 text-sm font-medium"
+                className="w-full h-8 text-md font-medium"
                 type="submit"
                 onClick={handleSignup}
               >

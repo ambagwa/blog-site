@@ -20,13 +20,13 @@ const ExploreNavbar = ({ handleBlogCategories }) => {
   ];
 
   return (
-    <div className="flex flex-wrap items-center space-x-2 md:px-16">
+    <div className="flex flex-wrap items-center space-x-4 md:px-16">
       {categories.map((category) => (
         <Button
           key={category}
-          size="xs"
+          size="lg"
           variant={active === category ? "blue" : "ghost"}
-          className={`text-[9px] font-normal tracking-wide bg-gray-100 dark:bg-gray-700 rounded-3xl p-2 hover:cursor-pointer ${
+          className={`text-md font-normal tracking-wide bg-gray-100 dark:bg-gray-700 rounded-3xl py-2 px-3 hover:cursor-pointer ${
             active === category
               ? "bg-blue-600 text-white"
               : "text-gray-700 dark:text-gray-400 dark:hover:bg-teal-900 hover:bg-gray-200"

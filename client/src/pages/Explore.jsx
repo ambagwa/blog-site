@@ -58,10 +58,10 @@ export const Explore = () => {
 
   return (
     <div className="p-5 bg-blue-50 dark:bg-gray-900 shadow-lg min-h-screen">
-      <h1 className="font-inter font-bold text-gray-900 dark:text-gray-100 tracking-wide text-center text-xl">
+      <h1 className="font-inter font-bold text-gray-900 dark:text-gray-100 tracking-wide text-center text-5xl">
         Discover amazing blog posts
       </h1>
-      <p className="mb-5 dark:text-gray-200 font-inter text-center text-[10px] mt-1 tracking-wider text-gray-600">
+      <p className="mb-5 dark:text-gray-200 font-inter text-center text-lg mt-1 tracking-wider text-gray-600">
         Browse through our collection of stories from talented writers
       </p>
 
@@ -85,22 +85,24 @@ export const Explore = () => {
                   className="rounded-sm hover:shadow-lg p-3 bg-white dark:bg-gray-800 shadow-md hover:cursor-pointer group hover:-translate-y-1 transition-all duration-300"
                 >
                   {/**Floating tabs */}
-                  <div className="flex gap-2  flex-row">
+                  <div className="flex gap-2 flex-row">
                     <span className="flex gap-1 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-600 text-[8px] font-normal p-1 rounded-lg px-3">
-                      <Tag className="h-2 w-2 mt-0.5" />
-                      {blog.category}
+                      <Tag className="h-3 w-3 mt-0.5" />
+                      <p className="text-[11px]">{blog.category}</p>
                     </span>
                     <span className="flex gap-1 p-1 font-normal text-[8px]">
-                      <Calendar className="h-2 w-2 mt-0.5" />
-                      {format(new Date(blog.createdAt), "MMM d, yyyy")}
+                      <Calendar className="h-3 w-3 mt-0.5" />
+                      <p className="text-[11px]">
+                        {format(new Date(blog.createdAt), "MMM d, yyyy")}
+                      </p>
                     </span>
                   </div>
                   {/**title */}
-                  <h2 className="group-hover:text-blue-800 group-hover:underline transition-colors duration-200 font-bold tracking-wide text-sm my-2">
+                  <h2 className="group-hover:text-blue-800 group-hover:underline transition-colors duration-200 font-bold tracking-wide text-[17px] my-2">
                     {blog.title}
                   </h2>
                   {/**content */}
-                  <p className="text-[10px] text-gray-500 line-clamp-3">
+                  <p className="text-[12px] text-gray-500 line-clamp-3">
                     {blog.content}
                   </p>
 
@@ -108,11 +110,10 @@ export const Explore = () => {
                   {blog.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-2">
                       {" "}
-                      {/* Changed from gap-2 to gap-1 and added flex-wrap */}
                       {blog.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className="bg-blue-100 dark:text-blue-200 text-blue-800 text-[8px] px-2 py-1 rounded-full  dark:bg-gray-700 whitespace-nowrap"
+                          className="bg-blue-100 dark:text-blue-200 text-blue-800 text-[8px] px-2 tracking-wide py-1 rounded-full  dark:bg-gray-700 whitespace-nowrap"
                         >
                           {tag}
                         </span>

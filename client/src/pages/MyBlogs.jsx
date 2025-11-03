@@ -70,15 +70,15 @@ export const MyBlogs = () => {
     <div className="px-5 bg-blue-50 dark:bg-gray-900 md:px-20 pt-5 font-inter min-h-screen">
       {/** Title */}
       <div className="flex align-center justify-between my-1">
-        <h1 className="font-bold text-[14px]">My Blog Posts</h1>
+        <h1 className="font-bold text-2xl">My Blog Posts</h1>
         <Button
-          size="xs"
+          size="md"
           variant="blue"
           className="hover:cursor-pointer"
           onClick={handleOpenForm}
         >
           <div className="flex space-x-1">
-            <PlusIcon />
+            <PlusIcon className="font-extrabold mt-0.5" />
             <p>New Post</p>
           </div>
         </Button>
@@ -103,7 +103,7 @@ export const MyBlogs = () => {
           placeholder="Search blogs by title..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="h-7 px-2 py-0.5 text-[10px]"
+          className="h-8 px-2 py-0.5 text-[10px]"
         />
         <InputGroupAddon className="h-7 px-2">
           <SearchIcon className="h-3 w-3" />

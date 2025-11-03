@@ -54,15 +54,15 @@ const Home = () => {
         onSigninClick={toggleSignin}
       />
 
-      <div className="px-10 py-5 bg-gray-100">
-        <h1 className="font-black text-center text-3xl pt-10 font-serif">
+      <div className="flex flex-col items-center justify-center px-30 pt-15 pb-50 bg-gray-100">
+        <h1 className="font-black text-center text-3xl md:text-5xl font-serif">
           Share your Findings with the World
         </h1>
         <p className="text-center mt-4 font-sans font-thin">
           Join our community of writers and readers. Create, publish, and
           discover amazing blog posts across various categories.
         </p>
-        <div className="mt-5 flex space-x-4 justify-center mb-5">
+        <div className="mt-7 flex space-x-4 justify-center mb-5">
           <Button
             variant="blue"
             className="hover:cursor-pointer"
@@ -102,7 +102,7 @@ const Home = () => {
 
             return (
               <div
-                className="bg-white rounded-2xl p-2 shadow-md hover:shadow-lg transition-shadow"
+                className="bg-white rounded-2xl p-2 shadow-lg hover:shadow-lg transition-shadow"
                 key={card.id}
               >
                 <div className="flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-blue-100 mx-auto">
