@@ -29,6 +29,10 @@ exports.createBlog = async (req, res) => {
         .status(401)
         .json({ error: "Unauthorized: Please log in to create a blog" });
 
+    // Ensure image is uploaded
+    if (!req.file)
+      return res.status(400).json({ error: "Image is required for the bloge" });
+
     // Check for duplicates
     const existingBlog = await Blog.findOne({ title, author });
     if (existingBlog)
@@ -36,7 +40,18 @@ exports.createBlog = async (req, res) => {
         .status(409)
         .json({ error: "You already have a blog with this title" });
 
-    const blog = await Blog.create({ title, content, author, tags, category });
+    // Pull file data from multer
+    const { path, filename } = req.file;
+
+    const blog = await Blog.create({
+      title,
+      content,
+      author,
+      tags,
+      category,
+      path,
+      filename,
+    });
 
     res.status(201).json({ blog });
   } catch (error) {

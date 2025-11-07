@@ -31,6 +31,7 @@ export const MyBlogs = () => {
 
     try {
       const res = await API.get("/api/blog/me");
+      console.log("Blogs data:", res.data.blogs);
       setBlogs(res.data.blogs);
     } catch (error) {
       console.error(`Error while fetching blogs: ${error}`);
@@ -53,9 +54,14 @@ export const MyBlogs = () => {
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`/api/blog/${id}`);
-    setBlogs((prevBlogs) => prevBlogs.filter((b) => b._id !== id));
-    toast("Task deleted");
+    try {
+      await API.delete(`/api/blog/${id}`);
+      setBlogs((prevBlogs) => prevBlogs.filter((b) => b._id !== id));
+      toast.success("Blog deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      toast.error("Failed to delete blog");
+    }
   };
 
   // Filter blogs based on title
@@ -126,29 +132,50 @@ export const MyBlogs = () => {
               <p className="mt-1 text-[10px] dark:text-gray-400 text-gray-700 line-clamp-3">
                 {blog.content}
               </p>
-              <div className="mt-1 flex items-center gap-2 text-[8px] text-gray-500">
-                <p>{format(new Date(blog.createdAt), "MMM d, yyyy")}</p>
-                <p>{blog.category}</p>
+              <div className="mt-2 flex justify-between">
+                <div className=" flex items-center gap-2 text-[8px] text-gray-500">
+                  <p>{format(new Date(blog.createdAt), "MMM d, yyyy")}</p>
+                  <p>{blog.category}</p>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="xs"
+                    className="p-1 dark:hover:bg-transparent group"
+                    onClick={() => handleUpdate(blog)}
+                  >
+                    <SquarePen className="h-4 w-4 text-gray-700 group-hover:text-blue-600 dark:group-hover:text-white transition-colors" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="xs"
+                    className="group hover:bg-transparent dark:hover:bg-transparent"
+                    onClick={() => handleDelete(blog._id)}
+                  >
+                    <Trash2 className="h-4 w-4 text-red-500 group-hover:text-red-700 dark:text-red-500 dark:group-hover:text-red-700 transition-colors" />
+                  </Button>
+                </div>
               </div>
             </div>
 
-            <div className="flex mt-1 flex-wrap items-center">
-              <Button
-                variant="ghost"
-                size="xs"
-                className="p-1 dark:hover:bg-transparent"
-                onClick={() => handleUpdate(blog)}
-              >
-                <SquarePen className="h-4 w-4 text-gray-700 dark:hover:text-white" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="xs"
-                className="dark:hover:text-white dark:hover:bg-transparent"
-                onClick={() => handleDelete(blog._id)}
-              >
-                <Trash2 className="h-4 w-4 text-red-700" />
-              </Button>
+            <div className="bg-red-100">
+              {blog.path ? (
+                <img
+                  src={`${
+                    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000"
+                  }/${blog.path}`}
+                  alt={blog.title}
+                  className="h-27 w-full object-cover"
+                />
+              ) : (
+                <div className="h-16 w-16 bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
+                  <span className="text-xs text-gray-500 text-center">
+                    No Image
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         ))

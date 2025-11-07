@@ -6,10 +6,11 @@ const connectDB = require("./config/db");
 const app = express();
 connectDB();
 
-
 // middleware
 app.use(cors());
 app.use(express.json());
+
+app.use("/uploads", express.static("uploads"));
 
 // Test route
 app.get("/test-cors", (req, res) => {

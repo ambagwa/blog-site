@@ -19,7 +19,10 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
     category: "",
     tags: "",
     content: "",
+    image: "",
   });
+  const [image, setImage] = useState(null);
+  const [existingImage, setExistingImage] = useState(editingBlog?.path || "");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(
@@ -92,13 +95,30 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
     e.preventDefault();
     if (!checkErrors()) return;
 
+    if (!image && !isEditing) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        image: "image is required",
+      }));
+      return;
+    }
+
     setLoading(true);
 
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("category", formData.category);
+      formDataToSend.append("content", formData.content);
+      formDataToSend.append("tags", JSON.stringify(formData.tags));
+      if (image) formDataToSend.append("image", image);
+
       let res;
       if (isEditing) {
         // Update existing blog
-        res = await API.put(`/api/blog/${editingBlog._id}`, formData);
+        res = await API.put(`/api/blog/${editingBlog._id}`, formDataToSend, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         toast("Blog updated successfully");
 
         // Refresh list with the updated blog
@@ -109,7 +129,9 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
         );
       } else {
         //Add new blog
-        res = await API.post("/api/blog", formData);
+        res = await API.post("/api/blog", formDataToSend, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         toast("Blog added successfully");
         // Refresh list
         setBlogs((prevBlogs) => [res.data.blog, ...prevBlogs]);
@@ -138,7 +160,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
               {/**Title input*/}
               <div className="space-y-1">
                 <Label htmlFor="blogTitle" className="text-[12px] font-medium">
-                  Title*
+                  Title{!isEditing && "*"}
                 </Label>
                 <Input
                   id="blogTitle"
@@ -240,7 +262,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
               {/** Tags input */}
               <div className="space-y-1">
                 <Label htmlFor="tags" className="text-[12px] font-medium">
-                  Tags*
+                  Tags{!isEditing && "*"}
                 </Label>
                 <Input
                   id="tags"
@@ -302,10 +324,71 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
                 </div>
               </div>
 
+              {/**Image Input */}
+              <div className="space-y-1">
+                <Label htmlFor="blogImage" className="text-[12px] font-medium">
+                  Photo{!isEditing && "*"}
+                </Label>
+                <Input
+                  id="blogImage"
+                  type="file"
+                  accept="image/*"
+                  name="image"
+                  className={`h-9 transition-all text-xs duration-400 ease-in-out ${
+                    errors.image
+                      ? "border-red-500 ring-1 ring-red-300 focus:ring-red-400 animate-glow"
+                      : "border-gray-300 focus:ring-1 focus:ring-blue-500"
+                  }`}
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                    setErrors((prev) => ({ ...prev, image: "" }));
+                  }}
+                />
+
+                {/**Show image text for editing */}
+                {isEditing && !image && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    Current image will be kept if no new file is selected
+                  </p>
+                )}
+
+                {/** Blog title error display*/}
+                <div
+                  className={`transition-all duration-400 overflow-hidden ${
+                    errors.image
+                      ? "max-h-10 opacity-100 translate-y-0"
+                      : "max-h-0 opacity-0 -translate-y-1"
+                  }`}
+                >
+                  {" "}
+                  {errors.title && (
+                    <p className="text-red-500 text-[10px] mt-1">
+                      {errors.title}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/**Preview image */}
+              {image && existingImage && (
+                <div className="mt-2">
+                  <p className="text-xs text-gary-600 mb-1">
+                    {isEditing && existingImage && !image
+                      ? "Current Image"
+                      : "Preview"}
+                  </p>
+                  <img
+                    className="w-24 h-24 object-cover rounded-md border"
+                    alt="Preview"
+                    src={image ? URL.createObjectURL(image) : existingImage}
+                  />
+                </div>
+              )}
+
               {/** Content input */}
               <div className="space-y-1">
                 <Label htmlFor="content" className="text-[12px] font-medium">
-                  Content*
+                  Content{!isEditing && "*"}
                 </Label>
                 <Textarea
                   id="content"

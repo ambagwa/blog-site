@@ -11,6 +11,8 @@ const blogSchema = new mongoose.Schema(
     },
     category: { type: String, default: "General" },
     tags: { type: [String], default: [] },
+    path: { type: String, required: true },
+    filename: { type: String, required: true },
   },
   { timestamps: true }
 );
