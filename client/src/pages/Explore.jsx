@@ -8,6 +8,7 @@ import { User } from "lucide-react";
 import { BlogModal } from "@/components/BlogModal";
 import { Spinner } from "@/components/ui/spinner";
 import { AnimatePresence, motion } from "framer-motion";
+import { BookImage } from "lucide-react";
 
 export const Explore = () => {
   const [blogs, setBlogs] = useState([]);
@@ -15,6 +16,7 @@ export const Explore = () => {
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imageErrors, setImageErrors] = useState({});
 
   useEffect(() => {
     loadBlogs();
@@ -56,6 +58,16 @@ export const Explore = () => {
     setSelectedBlog(null);
   };
 
+  // Get full image URL
+  const getImageUrl = (filename) => {
+    return `http://localhost:5000/uploads/${filename}`;
+  };
+
+  // Handle image loading errors
+  const handleImageError = (blogId) => {
+    setImageErrors((prev) => ({ ...prev, [blogId]: true }));
+  };
+
   return (
     <div className="p-5 bg-blue-50 dark:bg-gray-900 shadow-lg min-h-screen">
       <h1 className="font-inter font-bold text-gray-900 dark:text-gray-100 tracking-wide text-center text-5xl">
@@ -71,7 +83,7 @@ export const Explore = () => {
       {loading ? (
         <Spinner className="my-5 h-5 w-5 mx-auto" />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-5 md:px-15">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5 md:px-15">
           <AnimatePresence>
             {blogs && blogs.length > 0 ? (
               blogs.map((blog, index) => (
@@ -84,6 +96,26 @@ export const Explore = () => {
                   onClick={() => openModal(blog)}
                   className="rounded-sm hover:shadow-lg p-3 bg-white dark:bg-gray-800 shadow-md hover:cursor-pointer group hover:-translate-y-1 transition-all duration-300"
                 >
+                  {/** Blog Image*/}
+                  <div className="mb-3">
+                    <img
+                      src={getImageUrl(blog.filename)}
+                      onError={() => {
+                        handleImageError(blog._id);
+                        console.log("Image load error for blog:", blog._id);
+                      }}
+                      alt={blog.title}
+                      className="w-full h-48 object-cover rounded-sm"
+                    />
+                    {imageErrors[blog._id] && (
+                      <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-sm flex items-center justify-center">
+                        <span className="text-gray-500 text-sm">
+                          Image not available
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
                   {/**Floating tabs */}
                   <div className="flex gap-2 flex-row">
                     <span className="flex gap-1 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-600 text-[8px] font-normal p-1 rounded-lg px-3">
@@ -97,10 +129,12 @@ export const Explore = () => {
                       </p>
                     </span>
                   </div>
+
                   {/**title */}
-                  <h2 className="group-hover:text-blue-800 group-hover:underline transition-colors duration-200 font-bold tracking-wide text-[17px] my-2">
+                  <h2 className="line-clamp-2 group-hover:text-blue-800 group-hover:underline transition-colors duration-200 font-bold tracking-wide text-[17px] my-2">
                     {blog.title}
                   </h2>
+
                   {/**content */}
                   <p className="text-[12px] text-gray-500 line-clamp-3">
                     {blog.content}
