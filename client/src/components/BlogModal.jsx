@@ -5,6 +5,10 @@ import { format } from "date-fns";
 export const BlogModal = ({ blog, onClose }) => {
   if (!blog) return null; // Don't render if no blog is selected
 
+  const getImageUrl = (filename) => {
+    return `http://localhost:5000/uploads/${filename}`;
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm bg-opacity-40 flex justify-center items-center z-50">
       <div className="bg-white dark:bg-gray-800 rounded-md shadow-lg w-[90%] md:w-[60%] lg:w-[50%] p-5 relative animate-in fade-in duration-300">
@@ -16,9 +20,20 @@ export const BlogModal = ({ blog, onClose }) => {
           <X className="h-4 w-4" />
         </button>
 
+        {/**Blog Image */}
+        <div className="mt-4 mb-4">
+          <img
+            src={getImageUrl(blog.filename)}
+            alt={blog.title}
+            className="w-full h-60 object-cover rounded-sm"
+          />
+        </div>
+
         {/* Blog content */}
         <div className="space-y-3">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">{blog.title}</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">
+            {blog.title}
+          </h2>
           <div className="flex flex-wrap gap-3 text-[10px] text-gray-500">
             <span className="flex gap-1 items-center">
               <User className="h-3 w-3" /> {blog.author.username}

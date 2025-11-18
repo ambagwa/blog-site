@@ -110,7 +110,10 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
       formDataToSend.append("title", formData.title);
       formDataToSend.append("category", formData.category);
       formDataToSend.append("content", formData.content);
-      formDataToSend.append("tags", JSON.stringify(formData.tags));
+
+      // Send tags as comma-separated string
+      formDataToSend.append("tags", formData.tags.join(","));
+
       if (image) formDataToSend.append("image", image);
 
       let res;
@@ -318,7 +321,7 @@ export const AddBlog = ({ toggleForm, setBlogs, editingBlog }) => {
                   {" "}
                   {errors.tags && (
                     <p className="text-red-500 text-[10px] mt-1">
-                      {errors.title}
+                      {errors.tags}
                     </p>
                   )}
                 </div>
