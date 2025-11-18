@@ -9,10 +9,25 @@ exports.fetchAllBlogs = async (req, res) => {
 
     res.status(200).json({ blogs });
   } catch (error) {
-    console.error(`Error while fetching tasks: ${error}`);
+    console.error(`Error while fetching blogs: ${error}`);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Fetch a blog
+exports.fetchABlog = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const blog = await Blog.findById(id);
+
+    if(!blog) return res.status(404).json({error: "Blog NOT foune"});
+
+    res.status(200).json({blog});
+  } catch (error) {
+    console.error(`Error while fetching blog: ${error}`);
+    return res.status(500).json({error: "Internal server error"})
+  }
+}
 
 // Create blog
 exports.createBlog = async (req, res) => {
@@ -21,6 +36,9 @@ exports.createBlog = async (req, res) => {
 
     if (!title || !content || !tags || !category)
       return res.status(400).json({ error: "All blog details are required" });
+
+    //Parse tags from comma-separateedd string to array
+    const tagsArray = typeof tags === "string" ? tags.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0) : tags;
 
     // Use logged in user as the author
     const author = req.user?.id;
@@ -47,7 +65,7 @@ exports.createBlog = async (req, res) => {
       title,
       content,
       author,
-      tags,
+      tags: tagsArray,
       category,
       path,
       filename,

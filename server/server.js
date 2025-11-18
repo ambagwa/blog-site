@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+require("dotenv").config({ debug: true });
 const connectDB = require("./config/db");
 
 const app = express();
@@ -25,8 +25,7 @@ app.get("/test-cors", (req, res) => {
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  // console.log("Allowd origins:", allowedOrigins);
 });
