@@ -6,26 +6,26 @@ A **full-stack blogging platform** built with the **MERN stack (MongoDB, Express
 
 ## 🚀 Features
 
-- ✍️ **User Authentication** — JWT-based login & signup  
-- 👥 **Role-based Access** — Bloggers & Admins  
-- 📝 **Blog Management** — Create, Read, Update, Delete (CRUD)  
-- 🧭 **Explore Section** — Admins can view all blogs  
-- 🔍 **Search & Filter** — Filter by category or tag  
-- 🌙 **Light/Dark Theme** toggle  
-- 🧩 **Responsive Design** — Tailwind + Shadcn UI  
-- 💾 **MongoDB Integration** — Blogs & Users stored securely  
-- ⚡ **Real-time Filtering** & clean, modern UI  
+- ✍️ **User Authentication** — JWT-based login & signup
+- 👥 **Role-based Access** — Bloggers & Admins
+- 📝 **Blog Management** — Create, Read, Update, Delete (CRUD)
+- 🧭 **Explore Section** — Admins can view all blogs
+- 🔍 **Search & Filter** — Filter by category or tag
+- 🌙 **Light/Dark Theme** toggle
+- 🧩 **Responsive Design** — Tailwind + Shadcn UI
+- 💾 **MongoDB Integration** — Blogs & Users stored securely
+- ⚡ **Real-time Filtering** & clean, modern UI
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer | Technologies |
-|-------|---------------|
-| **Frontend** | React, React Router v6, Tailwind CSS, Shadcn/UI, Lucide React |
-| **Backend** | Node.js, Express.js, MongoDB (Mongoose) |
-| **Auth** | JWT (JSON Web Token) |
-| **Deployment (optional)** | Vercel / Netlify (Frontend), Render / Railway (Backend) |
+| Layer                     | Technologies                                                  |
+| ------------------------- | ------------------------------------------------------------- |
+| **Frontend**              | React, React Router v6, Tailwind CSS, Shadcn/UI, Lucide React |
+| **Backend**               | Node.js, Express.js, MongoDB (Mongoose)                       |
+| **Auth**                  | JWT (JSON Web Token)                                          |
+| **Deployment (optional)** | Vercel / Netlify (Frontend), Render / Railway (Backend)       |
 
 ---
 
@@ -119,16 +119,18 @@ Then open [http://localhost:5173](http://localhost:5173) (or the port shown in y
 ## 👤 User Roles
 
 ### **Blogger**
-- Can log in / register  
-- Can create, edit, delete **own blogs**  
-- Can view blogs under “My Blogs”  
+
+- Can log in / register
+- Can create, edit, delete **own blogs**
+- Can view blogs under “My Blogs”
 
 ### **Admin**
-- Can access **Explore Page** to view **all blogs**  
-- Can filter blogs by category  
-- Can create, edit, delete **own blogs**  
-- Can view blogs under “My Blogs”  
-- (Optional) Manage users or approve content  
+
+- Can access **Explore Page** to view **all blogs**
+- Can filter blogs by category
+- Can create, edit, delete **own blogs**
+- Can view blogs under “My Blogs”
+- (Optional) Manage users or approve content
 
 ---
 
@@ -148,71 +150,69 @@ Then open [http://localhost:5173](http://localhost:5173) (or the port shown in y
 
 ## 💡 Example Categories
 
-- Life  
-- Business  
-- Food  
-- Travel  
-- Technology  
-- Health  
+- Life
+- Business
+- Food
+- Travel
+- Technology
+- Health
 
 Each post belongs to one category and can include multiple tags.
 
 ---
 
-
 ## 🔍 Features in Action
 
-| Feature | Description |
-|----------|--------------|
-| **Search** | Filter blogs by title or tags |
-| **Category Filter** | Narrow down blogs by selected category |
-| **Dark/Light Mode** | Switch UI themes easily |
-| **Admin Explore View** | Access all user blogs |
+| Feature                | Description                            |
+| ---------------------- | -------------------------------------- |
+| **Search**             | Filter blogs by title or tags          |
+| **Category Filter**    | Narrow down blogs by selected category |
+| **Dark/Light Mode**    | Switch UI themes easily                |
+| **Admin Explore View** | Access all user blogs                  |
 
 ---
 
 ## 🧪 How to Use
 
-1. **Register or Log In** as a user  
-2. **Blogger**:  
-   - Navigate to "My Blogs"  
-   - Click **New Post**  
-   - Fill in title, content, category, and tags  
+1. **Register or Log In** as a user
+2. **Blogger**:
+   - Navigate to "My Blogs"
+   - Click **New Post**
+   - Fill in title, content, category, and tags
    - Click **Submit**
-3. **Admin**:  
-   - Log in as admin  
-   - Go to **Explore**  
-   - View, filter, and manage all blogs  
+3. **Admin**:
+   - Log in as admin
+   - Go to **Explore**
+   - View, filter, and manage all blogs
 
 ---
 
 ## 🧩 Future Improvements
 
-- 📱 Add mobile-first UI refinements  
-- 🖋️ Add markdown editor for blogs  
-- 💬 Add comments & reactions  
-- 📊 Add analytics dashboard for admins  
-- 🧍 Add profile pictures & bios for users  
-- ⚙️ Add pagination & search API endpoints  
+- 📱 Add mobile-first UI refinements
+- 🖋️ Add markdown editor for blogs
+- 💬 Add comments & reactions
+- 📊 Add analytics dashboard for admins
+- 🧍 Add profile pictures & bios for users
+- ⚙️ Add pagination & search API endpoints
 
 ---
 
 ## 🧑‍💻 Contributing
 
-1. Fork the project  
-2. Create your feature branch  
+1. Fork the project
+2. Create your feature branch
    ```bash
    git checkout -b feature/my-feature
    ```
-3. Commit changes  
+3. Commit changes
    ```bash
    git commit -m "Add some feature"
    ```
-4. Push to your branch  
+4. Push to your branch
    ```bash
    git push origin feature/my-feature
    ```
-5. Open a Pull Request 🚀  
+5. Open a Pull Request 🚀
 
 ---
-
