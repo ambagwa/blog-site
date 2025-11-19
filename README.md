@@ -46,9 +46,12 @@ blog-site/
 │   │   └── blogRoutes.js
 │   ├── middleware/
 │   │   └── auth.js
+|   |   └── upload.js
 │   ├── config/
 │   │   └── db.js
+│   ├── uploads/
 │   ├── server.js
+│   ├── swagger.js
 │   └── .env
 │
 └── frontend/
@@ -212,3 +215,4 @@ Each post belongs to one category and can include multiple tags.
 5. Open a Pull Request 🚀  
 
 ---
+
