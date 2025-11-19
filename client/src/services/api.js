@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  // baseURL: "https://blog-site-backend-2xdt.onrender.com",
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  baseURL: "https://blog-site-backend-2xdt.onrender.com",
+  // baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
 });
 
 // Automatically add a token to every request if the user is logged in
